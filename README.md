@@ -296,3 +296,5 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 | Lívia da Silva Mendes | Clorpromazina | 10402 |
 | Larissa Gabrielly Santos Costa | larissa-gael-hash (Akirah) | 10252 |
 | Cesar Augusto Denelle Mussi | Meganoot2010 | 10463 |
+| Raul Esteves | raulxt3d | 10537 |
+| Pyetro Tiago | | 10380 |
