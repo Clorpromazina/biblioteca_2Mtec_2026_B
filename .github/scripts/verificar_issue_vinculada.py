@@ -24,6 +24,17 @@ PADRAO = re.compile(rf"\b{PALAVRAS}\s*:?\s*#(\d+)", re.IGNORECASE)
 PALAVRAS_PROXIMAS = r"(?:refs?|see|relacionad[ao]s?|relates?|ref\.?|veja)"
 PADRAO_PROXIMO = re.compile(rf"\b{PALAVRAS_PROXIMAS}\s*:?\s*#(\d+)", re.IGNORECASE)
 
+COMENTARIO_HTML = re.compile(r"<!--.*?-->", re.DOTALL)
+
+
+def remover_comentarios_html(corpo: str) -> str:
+    """O template de PR traz instruções dentro de comentários HTML
+    (<!-- ... -->), incluindo exemplos como 'Closes #12' — sem remover
+    isso antes de procurar por referências, um PR com a descrição vazia
+    (template intocado) passa no check por engano, "fechando" as issues
+    de exemplo do próprio template."""
+    return COMENTARIO_HTML.sub("", corpo or "")
+
 
 def extrair_referencias(corpo: str) -> list[int]:
     return sorted({int(n) for n in PADRAO.findall(corpo or "")})
@@ -62,7 +73,7 @@ def escrever_artefato_comentario(pr_number: str, corpo: str) -> None:
 def main() -> None:
     repo = os.environ["GITHUB_REPOSITORY"]
     pr_number = os.environ["PR_NUMBER"]
-    corpo_pr = os.environ.get("PR_BODY", "")
+    corpo_pr = remover_comentarios_html(os.environ.get("PR_BODY", ""))
 
     referencias = extrair_referencias(corpo_pr)
 
