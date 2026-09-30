@@ -292,3 +292,5 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 | Vinicius Frazão Barros | Frazao-009 | 10275 |
 | Nathan Rosário de Almeida | d3monrootkit | 10400 |
 | Victor Cipriano Fernandes | victorvmr2 | 10250 |
+| Maria Eduarda Ferreira da Silva | Maria-Ferreira-Silva | 10271 |
+| Lívia da Silva Mendes | Clorpromazina | 10402 |
