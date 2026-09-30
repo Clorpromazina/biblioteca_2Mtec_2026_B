@@ -294,3 +294,5 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 | Victor Cipriano Fernandes | victorvmr2 | 10250 |
 | Maria Eduarda Ferreira da Silva | Maria-Ferreira-Silva | 10271 |
 | Lívia da Silva Mendes | Clorpromazina | 10402 |
+| Larissa Gabrielly Santos Costa | larissa-gael-hash (Akirah) | 10252 |
+| Cesar Augusto Denelle Mussi | Meganoot2010 | 10463 |
