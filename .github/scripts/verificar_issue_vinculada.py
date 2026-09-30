@@ -46,34 +46,17 @@ def issue_existe(repo: str, numero: int) -> bool:
     return "pull_request" not in dado
 
 
-def comentar(repo: str, pr_number: str, corpo: str) -> None:
-    """Tenta publicar/atualizar o comentário no PR. Em PRs de fork o token é
-    somente leitura e isso falha com 403 — é esperado, não um erro real, e
-    nunca deve aparecer no console como se o script tivesse quebrado (por
-    isso capture_output=True em toda chamada `gh`). O veredito de verdade
-    já foi escrito no Step Summary do job antes desta função ser chamada."""
-    lista = subprocess.run(
-        ["gh", "api", f"repos/{repo}/issues/{pr_number}/comments", "--paginate"],
-        capture_output=True, text=True,
-    )
-    comentarios = json.loads(lista.stdout or "[]") if lista.returncode == 0 else []
-    existente = next((c for c in comentarios if MARCADOR in c.get("body", "")), None)
-    payload = json.dumps({"body": corpo})
-    if existente:
-        r = subprocess.run(
-            ["gh", "api", f"repos/{repo}/issues/comments/{existente['id']}", "-X", "PATCH", "--input", "-"],
-            input=payload, text=True, capture_output=True,
-        )
-    else:
-        r = subprocess.run(
-            ["gh", "api", f"repos/{repo}/issues/{pr_number}/comments", "-X", "POST", "--input", "-"],
-            input=payload, text=True, capture_output=True,
-        )
-    if r.returncode != 0:
-        print(
-            "Nota: não foi possível comentar no PR (normal em PRs de fork, cujo token é "
-            "somente leitura). O resultado real está no Step Summary deste job, acima. ▲"
-        )
+def escrever_artefato_comentario(pr_number: str, corpo: str) -> None:
+    """Grava o corpo do comentário e o número do PR em arquivos, para que o
+    workflow 'Comentar resultados dos checks no PR' (acionado via
+    workflow_run, que roda com permissão de escrita mesmo para PRs de fork)
+    os publique depois. PRs de fork recebem um GITHUB_TOKEN somente leitura
+    em workflows disparados por pull_request — por isso nunca tentamos
+    comentar diretamente aqui."""
+    with open("/tmp/comentario.md", "w", encoding="utf-8") as f:
+        f.write(corpo)
+    with open("/tmp/pr_number.txt", "w", encoding="utf-8") as f:
+        f.write(pr_number)
 
 
 def main() -> None:
@@ -106,7 +89,7 @@ def main() -> None:
         print(corpo)
         with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
             f.write(corpo + "\n")
-        comentar(repo, pr_number, corpo)
+        escrever_artefato_comentario(pr_number, corpo)
         sys.exit(0)
 
     linhas_erro = [
@@ -137,7 +120,7 @@ def main() -> None:
     print("\n".join(linhas_erro))
     with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as f:
         f.write(corpo + "\n")
-    comentar(repo, pr_number, corpo)
+    escrever_artefato_comentario(pr_number, corpo)
     sys.exit(1)
 
 
