@@ -92,33 +92,21 @@ Expand-Archive pl.zip -DestinationPath .
 cd portable-laravel-windows
 ```
 
-### 3. Ajuste os scripts do Portaravel para usar MySQL
+### 3. Ajuste necessário no Windows (SQLite → MySQL)
 
-Por padrão, o Portaravel roda com um banco SQLite embutido: os scripts
-`_env.sh`/`_env.bat` sobrescrevem `DB_CONNECTION`/`DB_DATABASE` como
-variáveis de ambiente, o que ignora silenciosamente o que você configurar
-no `.env` (Laravel dá prioridade à variável de ambiente). Como este
-projeto usa **MySQL** (ver "Stack técnica"), é preciso corrigir isso uma
-única vez, editando 4 arquivos para forçar `mysql` logo depois que eles
-carregam o `_env.sh`/`_env.bat`.
+No **Linux**, a distribuição do Portaravel já respeita o `DB_CONNECTION` que
+estiver definido no `.env` do projeto — como o `.env.example` deste
+repositório já vem configurado para `mysql` (você vai copiá-lo no passo 5),
+nenhum ajuste extra é necessário. Pule para o passo 4.
 
-**Linux** — em `shell.sh`, `run.sh`, `artisan.sh` e `composer.sh`,
-adicione estas duas linhas logo após a linha `source "$DIST_ROOT/_env.sh"`:
-```bash
-export DB_CONNECTION=mysql
-export DB_DATABASE=biblioteca
-```
+No **Windows**, a distribuição ainda sobrescreve `DB_CONNECTION`/
+`DB_DATABASE` como variáveis de ambiente antes de ler o `.env` (o que
+ignora silenciosamente o que você configurar lá — Laravel dá prioridade à
+variável de ambiente). É preciso corrigir isso uma única vez, editando 4
+arquivos para forçar `mysql` logo depois que eles carregam o `_env.bat`.
 
-Ou rode este comando (uma vez, na pasta do Portaravel) para aplicar nos
-quatro arquivos de uma vez:
-```bash
-for f in shell.sh run.sh artisan.sh composer.sh; do
-  sed -i '/source.*_env\.sh/a export DB_CONNECTION=mysql\nexport DB_DATABASE=biblioteca' "$f"
-done
-```
-
-**Windows** — em `shell.bat`, `run.bat`, `artisan.bat` e `composer.bat`,
-adicione estas duas linhas logo após a linha `call "%DIST_ROOT%\_env.bat"`:
+Em `shell.bat`, `run.bat`, `artisan.bat` e `composer.bat`, adicione estas
+duas linhas logo após a linha `call "%DIST_ROOT%\_env.bat"`:
 ```bat
 set "DB_CONNECTION=mysql"
 set "DB_DATABASE=biblioteca"
