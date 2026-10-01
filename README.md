@@ -34,7 +34,7 @@ idênticas — cada turma entrega sua própria implementação.
 
 ## Stack técnica
 
-- **Laravel 12** + PHP 8.3
+- **Laravel 12** + PHP 8.4
 - **Blade** + **Tailwind CSS** (via Laravel Breeze)
 - **MySQL 8**
 - **Vite** para build de assets front-end
@@ -136,10 +136,10 @@ rm -rf app
 mv ../biblioteca_2Mtec_2026_B app
 ```
 
-**Windows (CMD):**
-```cmd
-rmdir /s /q app
-move ..\biblioteca_2Mtec_2026_B app
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force app
+Move-Item ..\biblioteca_2Mtec_2026_B app
 ```
 
 ### 5. Instale as dependências e configure o `.env`
