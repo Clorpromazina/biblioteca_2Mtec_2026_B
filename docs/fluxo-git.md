@@ -11,7 +11,7 @@ Nunca trabalhes diretamente na `main`. Cria uma branch seguindo o Padrão de Bra
 
 git checkout -b tipo/issue-NN-descricao-curta
 
-                      Fazer Commit
+            Fazer Commit
 Após fazer as alterações nos arquivos, faça o commit:
 
 git add .
