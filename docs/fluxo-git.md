@@ -10,3 +10,9 @@ git clone <URLdorepositorio>
 Nunca trabalhes diretamente na `main`. Cria uma branch seguindo o Padrão de Branches:
 
 git checkout -b tipo/issue-NN-descricao-curta
+
+                      Fazer Commit
+Após fazer as alterações nos arquivos, faça o commit:
+
+git add .
+git commit -m "tipo/descricao-curta"
