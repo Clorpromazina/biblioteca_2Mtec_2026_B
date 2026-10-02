@@ -16,3 +16,16 @@ Após fazer as alterações nos arquivos, faça o commit:
 
 git add .
 git commit -m "tipo/descricao-curta"
+
+            Enviar a Branch para o GitHub (Push)
+Envia a tua branch local para o repositório remoto:
+
+git push origin tipo/issue-NN-descricao-curta
+
+                   Abrir o Pull Request (PR)
+
+ Entra ao repositório no **GitHub**.
+Clique em **Compare & pull request**.
+ O template de PR irá carregar automaticamente preenchendo as secções solicitadas (o que foi feito, issue que fecha e como testar)[cite: 1, 9].
+
+
