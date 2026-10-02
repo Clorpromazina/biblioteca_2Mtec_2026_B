@@ -96,11 +96,10 @@ class ProfileTest extends TestCase
 
         $this->assertNotNull($user->fresh());
     }
-    
-    /**
- * Verifica que visitantes não autenticados são redirecionados para o login.
- */
 
+    /**
+     * Verifica que visitantes não autenticados são redirecionados para o login.
+     */
     public function test_guest_cannot_access_profile_page(): void
     {
         $response = $this->get('/profile');
