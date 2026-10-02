@@ -26,6 +26,6 @@ git push origin tipo/issue-NN-descricao-curta
 
  Entra ao repositório no **GitHub**.
 Clique em **Compare & pull request**.
- O template de PR irá carregar automaticamente preenchendo as secções solicitadas (o que foi feito, issue que fecha e como testar)[cite: 1, 9].
+ O template de PR irá carregar automaticamente preenchendo as secções solicitadas (o que foi feito, issue que fecha e como testar)
 
 
