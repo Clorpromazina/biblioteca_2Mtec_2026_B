@@ -96,4 +96,11 @@ class ProfileTest extends TestCase
 
         $this->assertNotNull($user->fresh());
     }
+
+        public function test_guest_cannot_access_profile_page(): void
+    {
+        $response = $this->get('/profile');
+
+        $response->assertRedirect('/login');
+    }
 }
