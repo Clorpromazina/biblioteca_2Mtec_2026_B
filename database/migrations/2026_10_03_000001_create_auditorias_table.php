@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('AUDITORIAS', function (Blueprint $table) {
             $table->id('AUDCODIGO');
-            $table->foreignId('AUDUSUARIO')->nullable()->constrained('users')->nullOnDelete();
+            $table->unsignedBigInteger('AUDUSUARIO')->nullable()->index();
             $table->string('AUDACAO', 10);
             $table->string('AUDTABELA', 60);
             $table->unsignedBigInteger('AUDREGISTRO');
