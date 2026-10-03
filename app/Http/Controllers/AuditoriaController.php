@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Auditoria;
 use Illuminate\View\View;
 
+/**
+ * Exibe a tela de auditoria de alterações.
+ */
+
 class AuditoriaController extends Controller
 {
     /**
