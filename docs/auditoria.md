@@ -1,36 +1,18 @@
 # Auditoria de alterações
 
-## Decisão: tabela própria (e não o pacote `spatie/laravel-activitylog`)
+**Decisão:** tabela própria `AUDITORIAS` + trait `Auditavel`, em vez do pacote
+`spatie/laravel-activitylog`: sem dependência nova, já no padrão das nossas
+tabelas em MAIÚSCULAS e mais simples para o time entender.
 
-| Critério | Pacote spatie | Tabela própria |
-|---|---|---|
-| Dependência nova | Sim (`composer require`) | Não |
-| Funciona com nossas tabelas/colunas em MAIÚSCULAS | Precisa de configuração extra | Já nasce no nosso padrão |
-| Complexidade para o time aprender | Maior (muita "mágica") | Menor (~100 linhas que todos conseguem ler) |
-| Atende ao critério "usuário, data e o que mudou" | Sim | Sim |
+## Uso
 
-**Escolha:** tabela própria `AUDITORIAS`, alimentada pela trait `Auditavel`.
+Em qualquer model, adicione `use Auditavel;` dentro da classe (importando
+`App\Models\Concerns\Auditavel`). Criar, editar e excluir passam a gerar uma
+linha em `AUDITORIAS`.
 
-## Como usar em um model
+## Limitações
 
-```php
-use App\Models\Concerns\Auditavel;
-
-class Livro extends Model
-{
-    use Auditavel;
-}
-```
-
-Pronto: criar, editar e excluir esse model passa a gerar uma linha em `AUDITORIAS`.
-
-## Limitação conhecida
-
-Só são registradas alterações feitas via Eloquent (`$livro->save()`, `->update()`,
-`->delete()`). Alterações em massa via `DB::table(...)` ou `Livro::where(...)->update(...)`
-não disparam eventos e, portanto, não são auditadas.
-
-## Quem pode ver
-
-Apenas usuários com `is_admin = true` (Gate `ver-auditoria`, em `AppServiceProvider`).
-Tela em `/auditoria`.
+- Só registra alterações feitas via Eloquent (`save()`, `update()`, `delete()`).
+  `DB::table()` e updates em massa não disparam eventos.
+- A tela `/auditoria` é liberada só para os e-mails de `AUDITORIA_ADMINS`
+  (Gate `ver-auditoria`) até os níveis de acesso (#54) serem mesclados.
