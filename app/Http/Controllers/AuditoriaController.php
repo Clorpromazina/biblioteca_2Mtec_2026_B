@@ -8,7 +8,6 @@ use Illuminate\View\View;
 /**
  * Exibe a tela de auditoria de alterações.
  */
-
 class AuditoriaController extends Controller
 {
     /**
