@@ -18,10 +18,10 @@ Schedule::call(function () {
         ->where('lembrete_enviado', false)
         ->get();
 
-        foreach ($emprestimos as $emprestimo) {
+    foreach ($emprestimos as $emprestimo) {
         if ($emprestimo->user) {
             $emprestimo->user->notify(new LembreteEmprestimoVence($emprestimo));
             $emprestimo->update(['lembrete_enviado' => true]);
-            }
+        }
     }
 })->daily()->description('Enviar lembrete de empréstimos que vencem em 2 dias');
