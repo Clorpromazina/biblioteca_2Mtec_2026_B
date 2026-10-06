@@ -13,3 +13,7 @@ Artisan::command('inspire', function () {
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+Schedule::call(function () {
+    $emprestimos = Emprestimo::where('data_devolucao', now()->addDays(2)->toDateString())
+        ->where('lembrete_enviado', false)
+        ->get();
