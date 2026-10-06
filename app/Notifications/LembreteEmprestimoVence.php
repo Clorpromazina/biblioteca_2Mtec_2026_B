@@ -3,7 +3,6 @@
 namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -12,7 +11,6 @@ class LembreteEmprestimoVence extends Notification
     use Queueable;
 
     public $emprestimos;
-
 
     public function __construct($emprestimos = null)
     {
