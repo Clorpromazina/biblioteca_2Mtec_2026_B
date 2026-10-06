@@ -26,4 +26,4 @@ foreach ($emprestimos as $emprestimo) {
 
 }
 
-})->daily()->purpose('Enviar lembrete de empréstimos que vencem em 2 dias');
+})->daily()->description('Enviar lembrete de empréstimos que vencem em 2 dias');
