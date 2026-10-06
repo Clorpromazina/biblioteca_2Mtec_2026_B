@@ -27,3 +27,13 @@ foreach ($emprestimos as $emprestimo) {
 }
 
 })->daily()->description('Enviar lembrete de empréstimos que vencem em 2 dias');
+
+
+Artisan::command('testar:email', function () {
+    $user = \App\Models\User::first();
+
+    if ($user) {
+        $user->notify(new \App\Notifications\LembreteEmprestimoVence());
+        $this->info('E-mail de teste enviado com sucesso!');
+    } 
+})->description('Enviar e-mail de teste diretamente para o Mailtrap');
