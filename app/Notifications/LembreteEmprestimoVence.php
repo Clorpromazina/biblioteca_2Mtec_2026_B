@@ -35,9 +35,9 @@ class LembreteEmprestimoVence extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line('The introduction to the notification.')
+            ->line('O Emprestimo do livro vence em 2 dias.')
             ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            ->line('Obrigado pela atenção!');
     }
 
     /**
