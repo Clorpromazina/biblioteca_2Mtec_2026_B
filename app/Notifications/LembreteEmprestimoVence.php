@@ -11,12 +11,12 @@ class LembreteEmprestimoVence extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     */
-    public function __construct()
+    public $Emprestimos;
+
+
+    public function __construct($emprestimos = null)
     {
-        //
+        $this->$emprestimos = $Emprestimos;
     }
 
     /**
@@ -36,7 +36,7 @@ class LembreteEmprestimoVence extends Notification
     {
         return (new MailMessage)
             ->line('O Emprestimo do livro vence em 2 dias.')
-            ->action('Notification Action', url('/'))
+            ->action('Notification Act', url('/'))
             ->line('Obrigado pela atenção!');
     }
 
