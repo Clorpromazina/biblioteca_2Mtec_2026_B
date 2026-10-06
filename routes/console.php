@@ -2,8 +2,6 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 use App\Models\Emprestimo;
 use App\Notifications\LembreteEmprestimoVence;
@@ -14,7 +12,7 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function (){
-$dataAlvo = Carbon::now()=>addDays(2)->toDateString();
+$dataAlvo = Carbon::now()->addDays(2)->toDateString();
 
 $emprestimos = Emprestimo::whereDate('data_devolucao', $dataAlvo)
         ->where('lembrete_enviado', false)
