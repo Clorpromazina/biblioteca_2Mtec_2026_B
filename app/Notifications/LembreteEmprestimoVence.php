@@ -11,12 +11,12 @@ class LembreteEmprestimoVence extends Notification
 {
     use Queueable;
 
-    public $Emprestimos;
+    public $emprestimos;
 
 
     public function __construct($emprestimos = null)
     {
-        $this->emprestimos = $Emprestimos;
+        $this->emprestimos = $emprestimos;
     }
 
     /**
