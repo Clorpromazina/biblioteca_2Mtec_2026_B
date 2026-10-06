@@ -12,12 +12,16 @@ class LembreteEmprestimoVence extends Notification
 
     public $emprestimos;
 
+    /**
+ * Notificação para lembrar o utilizador sobre o vencimento de empréstimo.
+ */
     public function __construct($emprestimos = null)
     {
         $this->emprestimos = $emprestimos;
     }
 
     /**
+     * Esses comentrios ja vem quando vc baixa o Notification pelo artisan ta
      * Get the notification's delivery channels.
      *
      * @return array<int, string>
