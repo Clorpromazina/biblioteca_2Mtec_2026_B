@@ -35,5 +35,7 @@ Artisan::command('testar:email', function () {
     if ($user) {
         $user->notify(new \App\Notifications\LembreteEmprestimoVence());
         $this->info('E-mail de teste enviado com sucesso!');
-    } 
+    } else {
+        $this->error('Nenhum usuário encontrado no banco de dados!');
+    }
 })->description('Enviar e-mail de teste diretamente para o Mailtrap');
