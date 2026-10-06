@@ -13,8 +13,8 @@ class LembreteEmprestimoVence extends Notification
     public $emprestimos;
 
     /**
- * Notificação para lembrar o utilizador sobre o vencimento de empréstimo.
- */
+     * Notificação para lembrar o utilizador sobre o vencimento de empréstimo.
+     */
     public function __construct($emprestimos = null)
     {
         $this->emprestimos = $emprestimos;
