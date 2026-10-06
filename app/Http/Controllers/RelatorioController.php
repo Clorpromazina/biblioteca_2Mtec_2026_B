@@ -3,8 +3,9 @@
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
 
-public function atrasospdf()
-{
+class RelatorioController extends Controller{
+ public function atrasospdf()
+ {
     $atrasos = DB::table('EMPRESTIMOS')
         ->join('LIVROS', 'EMPRESTIMOS.EMPLIVRO', '=', 'LIVROS.LVRCODIGO')
         ->join('CLIENTES', 'EMPRESTIMOS.EMPCLIENTE', '=', 'CLIENTES.CLICODIGO')
@@ -16,10 +17,10 @@ public function atrasospdf()
 
     $pdf = Pdf::loadView('relatorios.atrasos', ['atrasos' => $atrasos]);
     return $pdf->download('relatorio_atrasos.pdf');
-}
+ }
 
-public function maisEmprestadosPdf()
-{
+ public function maisEmprestadosPdf()
+ {
     $maisEmprestados = DB::table('EMPRESTIMOS')
         ->join('LIVROS', 'EMPRESTIMOS.EMPLIVRO', '=', 'LIVROS.LVRCODIGO')
         ->select('LIVROS.LVRNOME', DB::raw('COUNT(EMPRESTIMOS.EMPCODIGO) as total_emprestimos'))
@@ -31,4 +32,5 @@ public function maisEmprestadosPdf()
 
     $pdf = Pdf::loadView('relatorios.mais-emprestados-pdf', ['maisEmprestados' => $maisEmprestados]);
     return $pdf->download('relatorio_mais_emprestados.pdf');
+ }
 }
