@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\DB;
  * Controller responsável por gerar relatórios em PDF.
  */
 class RelatorioController extends Controller{
+    /**
+     * Gera um relatório em PDF dos empréstimos que estão atrasados.
+     * 
+     */
  public function atrasospdf()
  {
     /**
@@ -26,10 +30,12 @@ class RelatorioController extends Controller{
 /**
  * Gera um relatório em PDF dos 10 livros mais emprestados.
  * 
- * ordena por quantidade de empréstimos (desc) e, em caso de empate, pelo nome do livro (asc).
  */
  public function maisEmprestadosPdf()
  {
+    /**
+     * Consulta os 10 livros mais emprestados, ordenados pelo número de empréstimos e pelo nome do livro.
+     */
     $maisEmprestados = DB::table('EMPRESTIMOS')
         ->join('LIVROS', 'EMPRESTIMOS.EMPLIVRO', '=', 'LIVROS.LVRCODIGO')
         ->select('LIVROS.LVRNOME', DB::raw('COUNT(EMPRESTIMOS.EMPCODIGO) as total_emprestimos'))
