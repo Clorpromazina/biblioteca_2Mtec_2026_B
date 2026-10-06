@@ -30,3 +30,17 @@ Schedule::call(function () {
         }
     }
 })->daily()->description('Enviar lembrete de empréstimos que vencem em 2 dias');
+<<<<<<< HEAD
+=======
+
+Artisan::command('testar:email', function () {
+    $user = User::first();
+
+    if ($user) {
+        $user->notify(new LembreteEmprestimoVence);
+        $this->info('E-mail de teste enviado com sucesso!');
+    } else {
+        $this->error('Nenhum usuário encontrado no banco de dados!');
+    }
+})->description('Enviar e-mail de teste diretamente para o Mailtrap');
+>>>>>>> parent of 03037e4 (Update console.php)
