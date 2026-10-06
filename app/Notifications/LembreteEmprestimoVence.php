@@ -16,7 +16,7 @@ class LembreteEmprestimoVence extends Notification
 
     public function __construct($emprestimos = null)
     {
-        $this->$emprestimos = $Emprestimos;
+        $this->emprestimos = $Emprestimos;
     }
 
     /**
@@ -36,7 +36,7 @@ class LembreteEmprestimoVence extends Notification
     {
         return (new MailMessage)
             ->line('O Emprestimo do livro vence em 2 dias.')
-            ->action('Notification Act', url('/'))
+            ->action('Ver Emprestimo', url('/'))
             ->line('Obrigado pela atenção!');
     }
 
