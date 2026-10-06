@@ -10,6 +10,10 @@ Artisan::command('inspire', function () {
 Schedule::call(function (){
 $dataAlvo = carbon::now()=>addDays(2)->toDateString();
 
+$emprestimos = Emprestimo::whereDate('data_devolucao', $dataAlvo)
+        ->where('lembrete_enviado', false)
+        ->get();
+
 
 
 
