@@ -21,8 +21,7 @@ class LembreteEmprestimoVence extends Notification
     }
 
     /**
-     * Esses comentrios ja vem quando vc baixa o Notification pelo artisan ta
-     * Get the notification's delivery channels.
+     * Pega a notificação
      *
      * @return array<int, string>
      */
@@ -32,7 +31,7 @@ class LembreteEmprestimoVence extends Notification
     }
 
     /**
-     * Get the mail representation of the notification.
+     * Pega o email da notficação.
      */
     public function toMail(object $notifiable): MailMessage
     {
@@ -43,7 +42,7 @@ class LembreteEmprestimoVence extends Notification
     }
 
     /**
-     * Get the array representation of the notification.
+     * Pega o array da notificação
      *
      * @return array<string, mixed>
      */
