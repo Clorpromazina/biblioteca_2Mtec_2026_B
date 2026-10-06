@@ -21,7 +21,7 @@ class LembreteEmprestimoVence extends Notification
     }
 
     /**
-     * Pega a notificação
+     * Pega a notificação do arrau
      *
      * @return array<int, string>
      */
@@ -31,7 +31,7 @@ class LembreteEmprestimoVence extends Notification
     }
 
     /**
-     * Pega o email da notficação.
+     * constroi a mensagem do email da notificação.
      */
     public function toMail(object $notifiable): MailMessage
     {
@@ -42,7 +42,7 @@ class LembreteEmprestimoVence extends Notification
     }
 
     /**
-     * Pega o array da notificação
+     * Obtém a representação em array da notificação.
      *
      * @return array<string, mixed>
      */
