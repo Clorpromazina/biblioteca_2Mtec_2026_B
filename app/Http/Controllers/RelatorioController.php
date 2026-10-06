@@ -17,3 +17,18 @@ public function atrasospdf()
     $pdf = Pdf::loadView('relatorios.atrasos', ['atrasos' => $atrasos]);
     return $pdf->download('relatorio_atrasos.pdf');
 }
+
+public function maisEmprestadosPdf()
+{
+    $maisEmprestados = DB::table('EMPRESTIMOS')
+        ->join('LIVROS', 'EMPRESTIMOS.EMPLIVRO', '=', 'LIVROS.LVRCODIGO')
+        ->select('LIVROS.LVRNOME', DB::raw('COUNT(EMPRESTIMOS.EMPCODIGO) as total_emprestimos'))
+        ->groupBy('LIVROS.LVRCODIGO', 'LIVROS.LVRNOME')
+        ->orderByDesc('total_emprestimos')
+        ->orderBy('LIVROS.LVRNOME')
+        ->limit(10)
+        ->get();
+
+    $pdf = Pdf::loadView('relatorios.mais-emprestados-pdf', ['maisEmprestados' => $maisEmprestados]);
+    return $pdf->download('relatorio_mais_emprestados.pdf');
+}
