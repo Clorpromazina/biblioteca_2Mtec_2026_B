@@ -34,7 +34,7 @@ idênticas — cada turma entrega sua própria implementação.
 
 ## Stack técnica
 
-- **Laravel 12** + PHP 8.3
+- **Laravel 12** + PHP 8.4
 - **Blade** + **Tailwind CSS** (via Laravel Breeze)
 - **MySQL 8**
 - **Vite** para build de assets front-end
@@ -92,33 +92,21 @@ Expand-Archive pl.zip -DestinationPath .
 cd portable-laravel-windows
 ```
 
-### 3. Ajuste os scripts do Portaravel para usar MySQL
+### 3. Ajuste necessário no Windows (SQLite → MySQL)
 
-Por padrão, o Portaravel roda com um banco SQLite embutido: os scripts
-`_env.sh`/`_env.bat` sobrescrevem `DB_CONNECTION`/`DB_DATABASE` como
-variáveis de ambiente, o que ignora silenciosamente o que você configurar
-no `.env` (Laravel dá prioridade à variável de ambiente). Como este
-projeto usa **MySQL** (ver "Stack técnica"), é preciso corrigir isso uma
-única vez, editando 4 arquivos para forçar `mysql` logo depois que eles
-carregam o `_env.sh`/`_env.bat`.
+No **Linux**, a distribuição do Portaravel já respeita o `DB_CONNECTION` que
+estiver definido no `.env` do projeto — como o `.env.example` deste
+repositório já vem configurado para `mysql` (você vai copiá-lo no passo 5),
+nenhum ajuste extra é necessário. Pule para o passo 4.
 
-**Linux** — em `shell.sh`, `run.sh`, `artisan.sh` e `composer.sh`,
-adicione estas duas linhas logo após a linha `source "$DIST_ROOT/_env.sh"`:
-```bash
-export DB_CONNECTION=mysql
-export DB_DATABASE=biblioteca
-```
+No **Windows**, a distribuição ainda sobrescreve `DB_CONNECTION`/
+`DB_DATABASE` como variáveis de ambiente antes de ler o `.env` (o que
+ignora silenciosamente o que você configurar lá — Laravel dá prioridade à
+variável de ambiente). É preciso corrigir isso uma única vez, editando 4
+arquivos para forçar `mysql` logo depois que eles carregam o `_env.bat`.
 
-Ou rode este comando (uma vez, na pasta do Portaravel) para aplicar nos
-quatro arquivos de uma vez:
-```bash
-for f in shell.sh run.sh artisan.sh composer.sh; do
-  sed -i '/source.*_env\.sh/a export DB_CONNECTION=mysql\nexport DB_DATABASE=biblioteca' "$f"
-done
-```
-
-**Windows** — em `shell.bat`, `run.bat`, `artisan.bat` e `composer.bat`,
-adicione estas duas linhas logo após a linha `call "%DIST_ROOT%\_env.bat"`:
+Em `shell.bat`, `run.bat`, `artisan.bat` e `composer.bat`, adicione estas
+duas linhas logo após a linha `call "%DIST_ROOT%\_env.bat"`:
 ```bat
 set "DB_CONNECTION=mysql"
 set "DB_DATABASE=biblioteca"
@@ -136,10 +124,10 @@ rm -rf app
 mv ../biblioteca_2Mtec_2026_B app
 ```
 
-**Windows (CMD):**
-```cmd
-rmdir /s /q app
-move ..\biblioteca_2Mtec_2026_B app
+**Windows (PowerShell):**
+```powershell
+Remove-Item -Recurse -Force app
+Move-Item ..\biblioteca_2Mtec_2026_B app
 ```
 
 ### 5. Instale as dependências e configure o `.env`
@@ -189,6 +177,154 @@ Saia do shell (`exit`) e inicie o servidor: `./run.sh` no Linux, ou
 
 O navegador abre automaticamente em **http://127.0.0.1:8080**. Se aparecer
 a tela do Laravel/Breeze, está tudo funcionando.
+
+### 8. Rode o Pint antes de abrir o PR
+
+O projeto usa o [Laravel Pint](https://laravel.com/docs/pint) para estilo
+de código, e o CI reprova o PR se houver qualquer problema (veja "Regras
+do projeto" abaixo). Rode sempre dentro do `./shell.sh`/`shell.bat`, na
+pasta `app/`:
+
+```bash
+./vendor/bin/pint
+```
+
+Sem argumentos, o Pint **corrige automaticamente** os problemas que
+encontrar — revise o que ele mudou, adicione ao commit e dê push. Se você
+só quer conferir sem alterar nada (é o que o CI roda), use:
+
+```bash
+./vendor/bin/pint --test
+```
+
+Migrations (`database/migrations/**`) são ignoradas pelo Pint (configurado
+em `pint.json`, na raiz do repositório) — só o restante do código
+(models, controllers, requests, etc.) é verificado.
+
+<!--A PARTIR DAQUI É MINHA PARTE -->
+
+# 🚀 Guia de Instalação e Execução do Projeto
+
+Este documento contém todas as instruções necessárias para clonar, configurar e rodar o projeto localmente do zero no seu PC.
+
+## 📌 Pré-requisitos
+
+Antes de iniciar, certifique-se de ter as seguintes ferramentas instaladas em sua máquina:
+
+* **PHP**: ^8.2 ou superior (com as extensões exigidas pelo Laravel habilitadas)
+
+* **Composer**: ^2.0 ou superior
+
+* **Node.js**: ^18.0 ou superior
+
+* **NPM**: ^9.0 ou superior
+
+* **Gerenciador de Banco de Dados**: MySQL, PostgreSQL ou SQLite
+
+## 🛠️ Passo a Passo de Instalação Local
+
+Siga a sequência de comandos descrita abaixo para preparar e executar o ambiente de desenvolvimento.
+
+### 1. Clonar o Repositório
+
+Abra seu terminal e execute o comando abaixo para clonar o projeto:
+
+```
+git clone https://github.com/SEU-USUARIO/SEU-repositorio.git
+cd seu-repositorio
+
+```
+<!-- U8SAR APENAS SEU USUARIO-->
+
+### 2. Instalar Dependências do PHP
+
+Instale os pacotes e dependências do ecossistema Laravel utilizando o Composer:
+
+```
+composer install
+
+```
+
+### 3. Instalar Dependências do Front-End
+
+Instale os pacotes de interface e dependências JavaScript/CSS utilizando o NPM:
+
+```
+npm install
+
+```
+
+### 4. Configurar o Arquivo de Ambiente
+
+Crie o arquivo de configuração `.env` copiando o modelo de exemplo padrão `.env.example`:
+
+```
+cp .env.example .env
+
+```
+<!-- EXEMPLO FICTICIO-->
+
+> **⚠️ Importante:**
+>
+> Abra o arquivo `.env` recém-criado em seu editor de texto e ajuste os parâmetros do banco de dados conforme o seu ambiente local:
+>
+> ```
+> DB_CONNECTION=mysql
+> DB_HOST=127.0.0.1
+> DB_PORT=3306
+> DB_DATABASE=nome_do_seu_banco
+> DB_USERNAME=seu_usuario
+> DB_PASSWORD=sua_senha
+> 
+> ```
+
+### 5. Gerar a Chave da Aplicação
+
+Gere a chave única de criptografia (`APP_KEY`) para garantir a segurança das sessões e dados criptografados:
+
+```
+php artisan key:generate
+
+```
+
+### 6. Executar as Migrations e Seeders
+
+Execute as migrações para criar a estrutura de tabelas no banco de dados e popule-o com os dados iniciais de teste:
+
+```
+php artisan migrate --seed
+
+```
+
+### 7. Compilar e Servir os Assets do Front-End
+
+Para compilar os recursos do Vite e permitir o recarregamento automático (*Hot Module Replacement*) durante o desenvolvimento, execute:
+
+```
+npm run dev
+
+```
+
+### 8. Iniciar o Servidor de Desenvolvimento PHP
+
+Em um **novo terminal**, inicie o servidor interno do Laravel:
+
+```
+php artisan serve
+
+```
+
+## 🌐 Acesso à Aplicação
+
+Após seguir todos os passos, a aplicação estará disponível e pronta para uso no seu navegador através do endereço:
+
+👉 [**http://localhost:8000**](http://localhost:8000)
+
+## 🗄️ Modelo de Dados
+
+Para entender a estrutura do banco de dados, os relacionamentos e a modelagem das entidades, consulte o diagrama Entidade-Relacionamento abaixo:
+
+> **Nota:** O arquivo da imagem está armazenado no repositório no diretório `docs/diagrama-er.png`.
 
 ### IDE
 
@@ -289,3 +425,13 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 | Nome completo | Nick | Registro de matrícula |
 |---|---|---|
 | Leticia Monteiro Cardoso | Lets607 | 10555|
+| Kauã Batista Miranda de Sousa | KauaBMSousa | 10518 |
+| Vinicius Frazão Barros | Frazao-009 | 10275 |
+| Nathan Rosário de Almeida | d3monrootkit | 10400 |
+| Victor Cipriano Fernandes | victorvmr2 | 10250 |
+| Maria Eduarda Ferreira da Silva | Maria-Ferreira-Silva | 10271 |
+| Lívia da Silva Mendes | Clorpromazina | 10402 |
+| Larissa Gabrielly Santos Costa | larissa-gael-hash (Akirah) | 10252 |
+| Cesar Augusto Denelle Mussi | Meganoot2010 | 10463 |
+| Raul Esteves | raulxt3d | 10537 |
+| Pyetro Tiago | | 10380 |
