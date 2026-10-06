@@ -22,3 +22,6 @@ Schedule::call(function () {
         if ($emprestimo->user) {
             $emprestimo->user->notify(new LembreteEmprestimoVence($emprestimo));
             $emprestimo->update(['lembrete_enviado' => true]);
+            }
+    }
+})->daily()->description('Enviar lembrete de empréstimos que vencem em 2 dias');
