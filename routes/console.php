@@ -8,7 +8,7 @@ Artisan::command('inspire', function () {
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function (){
-
+$dataAlvo = carbon::now()=>addDays(2)->toDateString();
 
 
 
