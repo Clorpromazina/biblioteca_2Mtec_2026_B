@@ -2,13 +2,19 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Schedule;
+use App\Models\Emprestimo;
+use App\Notifications\LembreteEmprestimoVence;
+use Carbon\Carbon;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
 Schedule::call(function (){
-$dataAlvo = carbon::now()=>addDays(2)->toDateString();
+$dataAlvo = Carbon::now()=>addDays(2)->toDateString();
 
 $emprestimos = Emprestimo::whereDate('data_devolucao', $dataAlvo)
         ->where('lembrete_enviado', false)
@@ -20,4 +26,4 @@ foreach ($emprestimos as $emprestimo) {
             }
 
 
-})->daily()->purpose('Enviar lembrete de empréstimos que vencem em 2 dias');
+}})->daily()->purpose('Enviar lembrete de empréstimos que vencem em 2 dias');
