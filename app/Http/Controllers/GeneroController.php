@@ -12,9 +12,9 @@ class GeneroController extends Controller
      */
     public function index()
     {
-    $generos = Genero::orderBy('GNRNOME')->paginate(15);
+        $generos = Genero::orderBy('GNRNOME')->paginate(15);
 
-    return view('generos.index', compact('generos'));
+        return view('generos.index', compact('generos'));
     }
 
     /**
@@ -30,7 +30,13 @@ class GeneroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Genero::create([
+            'GNRNOME' => $request->input('GNRNOME'),
+        ]);
+
+        return redirect()
+            ->route('generos.index')
+            ->with('success', 'Gênero cadastrado com sucesso.');
     }
 
     /**
@@ -54,7 +60,13 @@ class GeneroController extends Controller
      */
     public function update(Request $request, Genero $genero)
     {
-        //
+        $genero->update([
+            'GNRNOME' => $request->input('GNRNOME'),
+        ]);
+
+        return redirect()
+            ->route('generos.index')
+            ->with('success', 'Gênero atualizado com sucesso.');
     }
 
     /**
@@ -62,6 +74,10 @@ class GeneroController extends Controller
      */
     public function destroy(Genero $genero)
     {
-        //
+        $genero->delete();
+
+        return redirect()
+            ->route('generos.index')
+            ->with('success', 'Gênero excluído com sucesso.');
     }
 }
