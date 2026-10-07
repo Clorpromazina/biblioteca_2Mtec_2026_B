@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuditoriaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GeneroController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,6 +21,10 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'can:ver-auditoria'])->group(function () {
     Route::get('/auditoria', [AuditoriaController::class, 'index'])->name('auditoria.index');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('generos', GeneroController::class);
 });
 
 require __DIR__.'/auth.php';
