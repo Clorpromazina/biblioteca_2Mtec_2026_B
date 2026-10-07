@@ -6,6 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
+/**
+ * Notificação para lembrar o utilizador sobre o vencimento de empréstimo.
+ */
 class LembreteEmprestimoVence extends Notification
 {
     use Queueable;
@@ -13,7 +16,7 @@ class LembreteEmprestimoVence extends Notification
     public $emprestimos;
 
     /**
-     * Notificação para lembrar o utilizador sobre o vencimento de empréstimo.
+     *Cria uma nova instância da notificação.
      */
     public function __construct($emprestimos = null)
     {
