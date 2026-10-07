@@ -2,13 +2,12 @@
 
 use App\Models\Emprestimo;
 use App\Notifications\LembreteEmprestimoVence;
-use Illuminate\Foundation\Inspiring;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
 Schedule::call(function () {
     Emprestimo::where('data_devolucao', now()->addDays(2)->toDateString())
         ->where('lembrete_enviado', false)->get()
