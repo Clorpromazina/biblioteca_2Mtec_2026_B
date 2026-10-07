@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Schedule;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
-
+// eu acho que estou louco
 Schedule::call(function () {
     Emprestimo::where('data_devolucao', now()->addDays(2)->toDateString())
         ->where('lembrete_enviado', false)
