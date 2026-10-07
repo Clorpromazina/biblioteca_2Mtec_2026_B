@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AuditoriaController;
-use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
