@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Genero;
 use Illuminate\Http\Request;
 
+/**
+ * Controlador responsável pelo gerenciamento de gêneros.
+ */
 class GeneroController extends Controller
 {
     /**
