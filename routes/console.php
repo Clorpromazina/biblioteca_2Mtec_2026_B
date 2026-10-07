@@ -2,6 +2,8 @@
 
 use App\Models\Emprestimo;
 use App\Notifications\LembreteEmprestimoVence;
+use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 
 Artisan::command('inspire', function () {
