@@ -22,7 +22,7 @@ class GeneroController extends Controller
      */
     public function create()
     {
-        //
+        return view('generos.create');
     }
 
     /**
@@ -44,7 +44,7 @@ class GeneroController extends Controller
      */
     public function show(Genero $genero)
     {
-        //
+        return view('generos.show', compact('genero'));
     }
 
     /**
@@ -52,7 +52,7 @@ class GeneroController extends Controller
      */
     public function edit(Genero $genero)
     {
-        //
+        return view('generos.edit', compact('genero'));
     }
 
     /**
