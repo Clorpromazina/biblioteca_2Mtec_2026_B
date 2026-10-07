@@ -28,6 +28,7 @@ class Usuario extends User
 
     protected $casts = ['USRDTCAD' => 'date'];
 
+    /** Função que retorna a senha do usuário para autenticação */
     public function getAuthPassword()
     {
         return $this->USRSENHA;
