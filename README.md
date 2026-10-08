@@ -424,6 +424,7 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 
 | Nome completo | Nick | Registro de matrícula |
 |---|---|---|
+| Leticia Monteiro Cardoso | Lets607 | 10555|
 | Kauã Batista Miranda de Sousa | KauaBMSousa | 10518 |
 | Vinicius Frazão Barros | Frazao-009 | 10275 |
 | Nathan Rosário de Almeida | d3monrootkit | 10400 |
@@ -433,5 +434,8 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 | Larissa Gabrielly Santos Costa | larissa-gael-hash (Akirah) | 10252 |
 | Cesar Augusto Denelle Mussi | Meganoot2010 | 10463 |
 | Raul Esteves | raulxt3d | 10537 |
+| Rafael Izack De Oliveira Barretos | pzzxis | 10383 |
+| Lucas Cavalcante de Oliveira | Luckpoet | 10270 |
 | Pyetro Tiago | | 10380 |
 | Paulo Henrique Borges Ferreira | Paulo-cmd1337 | 10248 |
+| Yasmin Bras | 02hollis | 10272
