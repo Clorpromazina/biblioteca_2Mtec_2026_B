@@ -437,4 +437,5 @@ Pull Request individual (veja a issue "Adicionar seu nome ao README").
 | Rafael Izack De Oliveira Barretos | pzzxis | 10383 |
 | Lucas Cavalcante de Oliveira | Luckpoet | 10270 |
 | Pyetro Tiago | | 10380 |
+| Paulo Henrique Borges Ferreira | Paulo-cmd1337 | 10248 |
 | Yasmin Bras | 02hollis | 10272
